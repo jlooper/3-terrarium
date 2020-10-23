@@ -240,9 +240,13 @@ Note the use of percentages here, even for the `border-radius`. If you scale you
 
 ---
 
-🚀Challenge: Add a 'bubble' shine to the left bottom area of the jar to make it look more glasslike. You will be styling the `.jar-glossy-long` and `.jar-glossy-short` to look like a reflected shine. Here's how it would look:
+## 🚀Challenge
+
+Add a 'bubble' shine to the left bottom area of the jar to make it look more glasslike. You will be styling the `.jar-glossy-long` and `.jar-glossy-short` to look like a reflected shine. Here's how it would look:
 
 ![finished terrarium](./images/terrarium-final.png)
+
+To complete the post-lecture quiz, go through this Learn module: [Style your HTML app with CSS](https://docs.microsoft.com/en-us/learn/modules/build-simple-website/4-css-basics)
 
 ## [Post-lecture quiz](.github/post-lecture-quiz.md)
 
@@ -250,8 +254,6 @@ Note the use of percentages here, even for the `border-radius`. If you scale you
 
 CSS seems deceptively straightforward, but there are many challenges when trying to style an app perfectly for all browsers and all screen sizes. CSS-Grid and Flexbox are tools that have been developed to make the job a little more structured and more reliable. Learn about these tools by playing [Flexbox Froggy](https://flexboxfroggy.com/) and [Grid Garden](https://codepip.com/games/grid-garden/).
 
-**Assignment**: [CSS Refactoring](assignment.md)
+## Assignment
 
-Complete the following learn module(s) to complete the [post-lecture quiz](.github/post-lecture-quiz.md):
-
-[Style your HTML app with CSS](https://docs.microsoft.com/en-us/learn/modules/build-simple-website/4-css-basics)
+[CSS Refactoring](assignment.md)

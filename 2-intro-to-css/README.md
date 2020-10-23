@@ -201,7 +201,9 @@ Add this markup above the last `</div>` tag:
 
 ---
 
-🚀Challenge: There are some wild 'older' tags in HTML that are still fun to play with, though you shouldn't use deprecated tags such as [these tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) in your markup. Still, can you use the old `<marquee>` tag to make the h1 title scroll horizontally? (if you do, don't forget to remove it afterwards)
+## 🚀Challenge
+
+There are some wild 'older' tags in HTML that are still fun to play with, though you shouldn't use deprecated tags such as [these tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) in your markup. Still, can you use the old `<marquee>` tag to make the h1 title scroll horizontally? (if you do, don't forget to remove it afterwards)
 
 ## [Post-lecture quiz](.github/post-lecture-quiz.md)
 
@@ -209,4 +211,6 @@ Add this markup above the last `</div>` tag:
 
 HTML is the 'tried and true' building block system that has helped build the web into what it is today. Learn a little about its history by studying some old and new tags. Can you figure out why some tags were deprecated and some added? What tags might be introduced in the future?
 
-**Assignment: [Practice your HTML: Build a blog mockup](assignment.md)
+## Assignment
+
+[Practice your HTML: Build a blog mockup](assignment.md)

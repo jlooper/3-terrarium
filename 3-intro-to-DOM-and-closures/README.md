@@ -187,11 +187,13 @@ This small function resets the `onpointerup` and `onpointermove` events so that 
 
 Now you have completed your project!
 
----
-
 🥇Congratulations! You have finished your beautiful terrarium. ![finished terrarium](./images/terrarium-final.png)
 
-🚀Challenge: Add new event handler to your closure to do something more to the plants; for example, double-click a plant to bring it to the front. Get creative!
+---
+
+## 🚀Challenge
+
+Add new event handler to your closure to do something more to the plants; for example, double-click a plant to bring it to the front. Get creative!
 
 ## [Post-lecture quiz](.github/post-lecture-quiz.md)
 
@@ -199,5 +201,7 @@ Now you have completed your project!
 
 While dragging elements around the screen seems trivial, there are many ways to do this and many pitfalls, depending on the effect you seek. In fact, there is an entire [drag and drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) that you can try. We didn't use it in this module because the effect we wanted was somewhat different, but try this API on your own project and see what you can achieve.
 
-**Assignment: [Work a bit more with the DOM](assignment.md)
+## Assignment
+
+[Work a bit more with the DOM](assignment.md)
 
