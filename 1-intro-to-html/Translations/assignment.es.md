@@ -1,11 +1,11 @@
-# Refactorización CSS
+# Practica tu HTML: crea una maqueta de blog
 
 ## Instrucciones
 
-Cambie el estilo del terrario usando Flexbox o CSS Grid, y tome capturas de pantalla para mostrar que lo ha probado en varios navegadores. Es posible que deba cambiar el marcado, así que cree una nueva versión de la aplicación con el arte en su lugar para su refactorización. No se preocupe por hacer que los elementos se puedan arrastrar; solo refactorice el HTML y CSS por ahora.
+Imagínese que está diseñando o rediseñando su sitio web personal. Cree un marcado gráfico de su sitio y luego escriba el marcado HTML que usaría para construir los diversos elementos del sitio. Puede hacer esto en papel y escanearlo, o usar el software de su elección, solo asegúrese de codificar manualmente el marcado HTML.
 
 ## Rúbrica
 
-| Criterios | Ejemplar                                                         | Adecuada                      | Necesita mejorar                    |
-| -------- | ----------------------------------------------------------------- | ----------------------------- | ------------------------------------ |
-|          | Presenta un terrario completamente rediseñado usando Flexbox o CSS Grid | Modifique algunos de los elementos | No cambiar el estilo del terrario en absoluto |
+| Criterios | Ejemplar | Adecuado | Necesita mejorar |
+| -------- | -------------------------------------------------- --------------------------------- | -------------------------------------------------- ------------------------------ | -------------------------------------------------- ------------------------------- |
+| | El diseño de un blog se representa visualmente con al menos 10 elementos de marcado mostrados | Un diseño de blog se representa visualmente con alrededor de 5 elementos de marcado mostrados | El diseño de un blog se representa visualmente con un máximo de 3 elementos de marcado mostrados |

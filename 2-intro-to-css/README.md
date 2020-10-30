@@ -1,216 +1,259 @@
-# Terrarium Project Part 1: Introduction to HTML
+# Terrarium Project Part 2: Introduction to CSS
 
-![Introduction to HTML](images/webdev101-html.png)
+![Introduction to CSS](images/webdev101-css.png)
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture quiz](.github/pre-lecture-quiz.md)
 
 ### Introduction:
 
-HTML, or HyperText Markup Language, is the 'skeleton' of the web. If CSS 'dresses up' your HTML and JavaScript brings it to life, the body of your web application is its HTML. HTML's syntax even reflects that idea, as it includes "head", "body", and "footer" tags.
+CSS, or Cascading Style Sheets, solve an important problem of web development: how to make your web site look nice. Styling your apps makes them more usable and nicer-looking; you can also use CSS to create Responsive Web Design (RWD) - allowing your apps to look good no matter what screen size they are displayed on. CSS is not only about making your app look nice; its spec includes animations and transforms that can enable sophisticated interactions for your apps. The CSS Working Group helps maintain current CSS specifications; you can follow their work at [World Wide Web Consortium's site](https://www.w3.org/Style/CSS/members).
 
-In this lesson, we're going to use HTML to layout the 'skeleton' of our virtual terrarium's interface. It will have a title and three columns: a right and left column where the draggable plants live, and a center area that will be the actual glass-looking terrarium. By the end of this lesson, you will be able to see the plants in the columns, but the interface will look a little strange; don't worry, in the next section you will add CSS styles to the interface to make it look better.
+> Note, CSS is a language that evolves, like everything on the web, and not all browsers support newer parts of the specification. Always check your implementations by consulting [CanIUse.com](caniuse.com).
+
+In this lesson, we're going to add styles to our online terrarium and learn more about several CSS concepts: the cascade, inheritance, and the use of selectors, positioning, and using CSS to build layouts. In the process we will layout the terrarium and create the actual terrarium itself.
+
+### Prequisite:
+
+You should have the HTML for your terrarium built and ready to be styled.
 
 ### Task:
 
-On your computer, create a folder called 'terrarium' and inside it, a file called 'index.html'. You can do this in Visual Studio Code after you create your terrarium folder by opening a new VS Code window, clicking 'open folder', and navigating to your new folder. Click the small 'file' button in the Explorer pane and create the new file:
+In your terrarium folder, create a new file called `style.css`. Import that file in the `<head>` section:
 
-![explorer in VS Code](images/vs-code-index.png)
-
-> index.html files indicate to a browser that it is the default file in a folder; URLs such as `https://anysite.com/test` might be built using a folder structure including a folder called `test` with `index.html` inside it; `index.html` doesn't have to show in a URL.
+```
+<link rel="stylesheet" href="./style.css" />
+```
 
 ---
 
-## 1. The DocType and html tags
+## 1. The Cascade
 
-The first line of an HTML file is its doctype. It's a little surprising that you need to have this line at the very top of the file, but it tells older browsers that the browser needs to render the page in a standard mode, following the current html specification.
-
-> Tip: in VS Code, you can hover over a tag and get information about its use from the MDN Reference guides.
-
-The second line should be the `<html>` tag's opening tag, followed right now by its closing tag. These tags are the root elements of your interface.
+Cascading Style Sheets incorporate the idea that the styles 'cascade' such that the application of a style is guided by its priority. Styles set by a web site author take priority over those set by a browser. Styles set 'inline' take priority over those set in an external style sheet.
 
 ### Task:
 
-Add these lines at the top of your `index.html` file:
+Add the inline style "color: red" to your `<h1>` tag:
 
 ```HTML
-<!DOCTYPE html>
-<html></html>
+<h1 style="color: red">My Terrarium</h1>
 ```
 
-✅ There are a few different modes that can be determined by setting the DocType with a query string: [Quirks Mode and Standards Mode](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode). These modes used to support really old browsers that aren't normally used nowadays (Netscape Navigator 4 and Internet Explorer 5). You can stick to the standard doctype declaration.
+Then, add the following code to your `style.css` file:
+
+```CSS
+h1 {
+ color: blue;
+}
+```
+
+✅ Which color displays in your web app? Why? Can you find a way to override styles? When would you want to do this, or why not?
 
 ---
 
-## 2. The document's 'head'
+## 2. Inheritance
 
-The 'head' area of the HTML document includes crucial information about your web page, also known as [metadata](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta). In our case, we tell the web server to which this page will be sent to be rendered four things:
-
--   the page's title
--   page metadata including:
-    -   the 'character set', telling about what character encoding is used in the page
-    -   browser information, including `x-ua-compatible` which indicates that the IE=edge browser is supported
-    -   information about how the viewport should behave when it is loaded. Setting the viewport to have an initial scale of 1 controls the zoom level when the page is first loaded.
+Styles are inherited from an ancestor style to a descendent, such that nested elements inherit the styles of their parents.
 
 ### Task:
 
-Add a 'head' block to your document in between the opening and closing `<html>` tags.
+Set the body's font to a given font, and check to see a nested element's font:
 
-```html
-<head>
-	<title>Welcome to my Virtual Terrarium</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
+```
+body {
+	font-family: helvetica, arial, sans-serif;
+}
 ```
 
-✅ What would happen if you set a viewport meta tag like this: `<meta name="viewport" content="width=600">`? Read more about the [viewport](https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag).
+Open your browser's console to the 'Elements' tab and observe the H1's font. It inherits its font from the body, as stated within the browser:
+
+![inherited font](images/1.png)
+
+✅ Can you make a nested style inherit a different property?
 
 ---
 
-## 3. The document's `body`
+## 3. CSS Selectors
 
-### HTML Tags
+### Tags
 
-In HTML, you add tags to your .html file to create elements of a web page. Each tag usually has an opening and closing tag, like this: `<p>hello</p>` to indicate a paragraph. Create you interface's `<body>` by adding a set of tags inside the `<html>` tag pair; your markup now looks like this:
+So far, your `style.css` file has only a few tags styled, and the app looks pretty strange:
 
-### Task:
+```
+body {
+	font-family: helvetica, arial, sans-serif;
+}
 
-```html
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Welcome to my Virtual Terrarium</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
-</html>
+h1 {
+	color: #3a241d;
+	text-align: center;
+}
 ```
 
-Now, you can start building out your page. Normally, you use `<div>` tags to create the separate elements in a page. We'll create a series of `<div>` elements which will contain images.
+This way of styling a tag gives you control over unique elements, but you need to control the styles of many plants in your terrarium. To do that, you need to leverage CSS selectors.
 
-### Images
+### Ids
 
-One html tag that doesn't need a closing tag is the `<img>` tag, because it has a `src` element that contains all the information the page needs to render the item.
+Add some style to layout the left and right containers. Since there is only one left container and only one right container, they are given ids in the markup. To style them, use `#`:
 
-Create a folder in your app called `images` and in that, add all the images in the [source code folder](../images); (there are 14 images of plants).
+```
+#left-container {
+	background-color: #eee;
+	width: 15%;
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	height: 100%;
+	padding: 10px;
+}
 
-### Task:
+#right-container {
+	background-color: #eee;
+	width: 15%;
+	right: 0px;
+	top: 0px;
+	position: absolute;
+	height: 100%;
+	padding: 10px;
+}
+```
 
-Add those plant images into two columns between the `<body></body>` tags:
+Here, you have placed these containers with absolute positioning to the far left and right of the screen, and used percentages for their width so that they can scale for small mobile screens.
+
+✅ This code is quite repeated, thus not "DRY" (Don't Repeat Yourself); can you find a better way to style these ids, perhaps with an id and a class? You would need to change the markup and refactor the CSS:
 
 ```html
-<div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+<div id="left-container" class="container"></div>
+```
+
+### Classes
+
+In the example above, you styled two unique elements on the screen. If you want styles to apply to many elements on the screen, you can use CSS classes. Do this to layout the plants in the left and right containers.
+
+Notice that each plant in the HTML markup has a combination of ids and classes. The ids here are used by the JavaScript that you will add later to manipulate the terrarium plant placement. The classes, however, give all the plants a given style.
+
+```html
+<div class="plant-holder">
+	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 
-> Note: Spans vs. Divs. Divs are considered 'block' elements, and Spans are 'inline'. What would happen if you transformed these divs to spans?
+Add the following to your `style.css` file:
 
-With this markup, the plants now show up on the screen. It looks pretty bad, because they aren't yet styled using CSS, and we'll do that in the next lesson.
+```css
+.plant-holder {
+	position: relative;
+	height: 13%;
+	left: -10px;
+}
 
-Each image has an alt tag that will appear even if you can't see or render an image. This is an important element to include for accessibility. Learn more about accessibility in future lessons; for now, remember that it's important to enable screen readers to step through your web app so that visually impaired users can use your web site.
-
-✅ Did you notice that each image has the same alt tag? Is this good practice? Why or why not? Can you improve this code?
-
----
-
-## 4. Semantic markup
-
-In general, it's preferable to use 'semantics' when writing HTML. What does that mean? It means that you use HTML tags the way they were designed: to represent its data; so an H1 tag should always be present on a page
-
-Add the following line right below your opening `<body>` tag:
-
-```html
-<h1>My Terrarium</h1>
+.plant {
+	position: absolute;
+	max-width: 150%;
+	max-height: 150%;
+	z-index: 2;
+}
 ```
 
-Using semantic markup such as having headers be `<h1>` and unordered lists be rendered as `<ul>` helps screen readers navigate through a page. In general, buttons should be written as `<button>` and lists should be `<li>`. While it's _possible_ to use specially styled `<span>` elements with click handlers to mock buttons, it's better for differently-abled users to use technologies to determine where on a page a button resides, and to interact with it, if the element appears as a button. For this reason, try to use semantic markup as much as possible.
+Notable in this snippet is the mixture of relative and absolute positioning, which we'll cover in the next section. Take a look at the way heights are handled by percentages:
 
-✅ Take a look at a screen reader and [how it interacts with a web page](https://www.youtube.com/watch?v=OUDV1gqs9GA). Can you see why having non semantic markup might confuse the user?
+You set the height of the plant holder to 13%, a good number to ensure that all the plants are displayed in each vertical container without need for scrolling.
 
-## 5. The terrarium
+You set the plant holder to move to the left to allow the plants to be more centered within their container. The images have a large amount of transparent background so as to make them more draggable, so need to be pushed to the left to fit better on the screen.
 
-The last part of this interface involves creating markup that will be styled to create a terrarium.
+Then, the plant itself is given a max-width of 150%. This allows it to scale down as the browser scales down. Try resizing your browser; the plants stay in their containers but scale down to fit.
 
-### Task:
+Also notable is the use of z-index, which controls the relative altitude of an element (so that the plants sit on top of the container and appear to sit inside the terrarium).
 
-Add this markup above the last `</div>` tag:
+✅ Why do you need both a plant holder and a plant CSS selector?
 
-```html
-<div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
-</div>
+## 4. CSS Positioning
+
+Mixing position properties (there are static, relative, fixed, absolute, and sticky positions) can be a little tricky, but when done properly it gives you good control over the elements on your pages.
+
+Absolute positioned elements are positioned relative to their nearest positioned ancestors, and if there are none, it is positioned according to the document body.
+
+Relative positioned elements are positioned based on the CSS's directions to adjust its placement away from its initial position.
+
+In our sample, the `plant-holder` is a relative-positioned element that is positioned within an absolute-positioned container. The resultant behavior is that the side bar containers are pinned left and right, and the plant-holder is nested, adjusting itself within the side bars, giving space for the plants to be placed in a vertical row.
+
+> The `plant` itself also has absolute positioning, necessary to making it draggable, as you will discover in the next lesson.
+
+✅ Experiment with switching the types of positioning of the side containers and the plant-holder. What happens?
+
+## 5. CSS Layouts
+
+Now you will use what you learned to build the terrarium itself, all using CSS!
+
+First, style the `.terrarium` div children as a rounded rectangle using CSS:
+
+```css
+.jar-walls {
+	height: 80%;
+	width: 60%;
+	background: #d1e1df;
+	border-radius: 10%;
+	position: absolute;
+	bottom: 0.5%;
+	left: 20%;
+	opacity: 0.5;
+	z-index: 1;
+}
+
+.jar-top {
+	width: 50%;
+	height: 5%;
+	background: #d1e1df;
+	position: absolute;
+	bottom: 80.5%;
+	left: 25%;
+	opacity: 0.7;
+	z-index: 1;
+}
+
+.jar-bottom {
+	width: 50%;
+	height: 1%;
+	background: #d1e1df;
+	position: absolute;
+	bottom: 0%;
+	left: 25%;
+	opacity: 0.7;
+}
+
+.dirt {
+	width: 58%;
+	height: 5%;
+	background: #3a241d;
+	position: absolute;
+	border-radius: 0 0 4rem 4rem;
+	bottom: 1%;
+	left: 21%;
+	opacity: 0.7;
+	z-index: -1;
+}
 ```
 
-✅ Even though you added this markup to the screen, you see absolutely nothing render. Why?
+Note the use of percentages here, even for the `border-radius`. If you scale your browser down, you can see how the jar corners scale as well. Also notice the widths and height percentages for the jar elements and how each element is absolutely positioned in the center, pinned to the bottom of the viewport.
+
+✅ Try changing the jar colors and opacity vs. those of the dirt. What happens? Why?
 
 ---
 
 ## 🚀Challenge
 
-There are some wild 'older' tags in HTML that are still fun to play with, though you shouldn't use deprecated tags such as [these tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) in your markup. Still, can you use the old `<marquee>` tag to make the h1 title scroll horizontally? (if you do, don't forget to remove it afterwards)
+Add a 'bubble' shine to the left bottom area of the jar to make it look more glasslike. You will be styling the `.jar-glossy-long` and `.jar-glossy-short` to look like a reflected shine. Here's how it would look:
+
+![finished terrarium](./images/terrarium-final.png)
+
+To complete the post-lecture quiz, go through this Learn module: [Style your HTML app with CSS](https://docs.microsoft.com/en-us/learn/modules/build-simple-website/4-css-basics)
 
 ## [Post-lecture quiz](.github/post-lecture-quiz.md)
 
 ## Review & Self Study
 
-HTML is the 'tried and true' building block system that has helped build the web into what it is today. Learn a little about its history by studying some old and new tags. Can you figure out why some tags were deprecated and some added? What tags might be introduced in the future?
+CSS seems deceptively straightforward, but there are many challenges when trying to style an app perfectly for all browsers and all screen sizes. CSS-Grid and Flexbox are tools that have been developed to make the job a little more structured and more reliable. Learn about these tools by playing [Flexbox Froggy](https://flexboxfroggy.com/) and [Grid Garden](https://codepip.com/games/grid-garden/).
 
 ## Assignment
 
-[Practice your HTML: Build a blog mockup](assignment.md)
+[CSS Refactoring](assignment.md)
