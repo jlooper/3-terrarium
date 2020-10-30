@@ -8,7 +8,7 @@ A small drag and drop code-meditation. With a little HTML, JS and CSS, you can b
 
 1. [Intro to HTML](./1-intro-to-html/README.md)
 2. [Intro to CSS](./2-intro-to-css/README.md)
-3. [Intro to DOM and JS Closures](./3-intro-to-DOM-and-js-closures/README.md)
+3. [Intro to DOM and JS Closures](./3-intro-to-DOM-and-closures/README.md)
 
 ## Credits
 
